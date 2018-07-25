@@ -1,6 +1,9 @@
-## Sample JS Project Proposal: Conway's Game of Life with Variations
+## JavaScript Project Proposal: Profound Sound
 
 ### Background
+
+Profound Sound is a music video set to **Animal Collective's** **Leafhouse** from the album **Sung Tongs**.  
+
 
 Conway's Game of Life is a classic example of the concept of **cellular automata**.  The original GoL is a 0-player game that plays out on a rectangular grid.  Each cell on the grid is either dead or alive when the game begins.  On the next iteration of the game (called a "generation") the cells follow these rules:
 
@@ -12,7 +15,7 @@ There are many variations on the GoL.  This simulation will incorporate several 
 
 ### Functionality & MVP  
 
-With this Conway's Game of Life simulator, users will be able to:
+With Profound Sound, users will be able to:
 
 - [ ] Start, pause, and reset the game board
 - [ ] Select squares to be alive in the initial state
