@@ -25,5 +25,13 @@
         </div>
       </div>
     </div>
+
+    <audio id="audioElement" src="./assets/audio/colors.mp3"></audio>
+    <div>
+      <button onclick="document.getElementById('audioElement').play()">Play Colors</button>
+      <button onclick="document.getElementById('audioElement').pause()">Pause Colors</button>
+      <button onclick="document.getElementById('audioElement').volume+=0.1">Increase Volume</button>
+      <button onclick="document.getElementById('audioElement').volume-=0.1">Decrease Volume</button>
+    </div>
   </body>
 </html>

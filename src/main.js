@@ -1,3 +1,5 @@
+
+
 window.onload = function() {
     // const question = document.getElementsByClassName('help')[0];
     const closeButton = document.getElementsByClassName('close')[0];
@@ -10,4 +12,5 @@ window.onload = function() {
     // question.addEventListener("click", function() {
     //   modal.classList.remove("closed");
     // });
+
 };
