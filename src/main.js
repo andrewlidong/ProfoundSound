@@ -1,5 +1,5 @@
-import * as KOCH_CURVE from "./koch_curve";
-import * as GRAPH from "./graph";
+// import * as KOCH_CURVE from "./koch_curve";
+// import * as GRAPH from "./graph";
 import * as MODAL from "./modal";
 import * as TREE from "./tree";
 import * as SUN from "./sun";
