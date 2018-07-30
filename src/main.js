@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let audio = document.getElementById("audioElement");
 
+
+
     const playButton = document.querySelector('.play-button');
     playButton.addEventListener('click', () => {
       audio.play();
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audioSrc.connect(analyser);
     audioSrc.connect(audioCtx.destination);
 
-    let frequencyData = new Uint8Array(50);
+    let frequencyData = new Uint8Array(200);
 
 
     const canvas = document.getElementById('canvas');
@@ -79,12 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    function drawSun(context, freqValue, freqSequence) {
+    function drawSun(context, freqValue) {
         let transparency;
-        let hue = 250;
+        let hue = 40;
 
-        let x = ((canvas.width - 200)),
-            y = ((200));
+        let x = ((canvas.width - 400)),
+            y = ((300));
 
         if (false){
           transparency = 0.01;
@@ -93,29 +95,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         context.beginPath();
-        context.arc(x-(freqValue / 8), y-(freqValue / 8), (Math.abs(freqValue-120)) * 5 , 0, 2 * Math.PI, false);
+        context.arc(x-(freqValue / 8), y-(freqValue / 8), (Math.abs(freqValue-150)) * 2 , 0, 2 * Math.PI, false);
         context.strokeStyle = 'hsla(' + hue + ', ' + 100 + '%,' + 40 + '%,' + transparency  + ')';
-        context.fillStyle = "hsla(" + hue + ", 100%, 40%, .01)";
+        context.fillStyle = "hsla(" + hue + ", 100%, 60%, .01)";
 
         context.fill();
         context.lineWidth = 2;
         context.stroke();
     }
 
-    function animateSun(context, canvasWidth, canvasHeight, analyser) {
+    function animateSun(ctx, canvasWidth, canvasHeight, analyser) {
         let freqArray;
-
-        context.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         freqArray = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteTimeDomainData(freqArray);
 
           for (let i = 0; i < freqArray.length; i += 1) {
               let point = freqArray[i];
-              drawSun(context, point, i);
+              drawSun(context, point);
               // drawTree(treeCanvasWidth/2, treeCanvasHeight -100, 150, point, 20, treeContext, treeCanvas, "black", "darkred", "pink");
             }
 
-        requestAnimationFrame(animateSun);
+        requestAnimationFrame(animateSun.bind(this, ctx, canvasWidth, canvasHeight, analyser));
     }
 
 
@@ -126,16 +127,16 @@ document.addEventListener('DOMContentLoaded', () => {
     treeCanvas.width = window.innerWidth;
     treeCanvas.height = window.innerHeight;
 
-    TREE.drawTree(treeCanvas.width/2, treeCanvas.height, 180, 0, 20, treeContext, treeCanvas, "black", "darkblue", "pink");
+    TREE.drawTree(treeCanvas.width/2, treeCanvas.height, 200, 0, 20, treeContext, treeCanvas, "black", "red", "pink");
 
 
 
     // where we copy our audio frequency data to.
 
     // increased size of svg to accomodate larger amounts of data points.
-    let svgHeight='1000';
-    let svgWidth= '1000';
-    let barPadding='5';
+    let svgHeight= window.innerHeight;
+    let svgWidth= window.innerWidth + 1700;
+    let barPadding='15';
 
 
     let svg = D3BAR.createSvg('.frequency-bar', svgHeight, svgWidth);
@@ -144,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .data(frequencyData)
       .enter()
       .append('rect')
-      .attr('x',function(d,i) {
+      .attr('x', function(d,i) {
         return i * (svgWidth / frequencyData.length);
       })
       .attr('width', svgWidth / frequencyData.length - barPadding);
@@ -172,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return d;
         })
         .attr('fill', function(d) {
-          return 'rgb(0, 0, 0,  ' + d + ')';
+          return 'rgb(0, 200,' + d + ')';
         });
     }
 

@@ -14,13 +14,25 @@
   height: 50%;
   margin: 5% auto;
   padding: 25px;
-  background-color: lightpink;
+  background-color: beige;
+  background-image: url('../assets/images/rain.gif');
+  background-size: cover;
   color: black;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: 20px;
 }
+
+/* .modal-background {
+  background-image: url('../assets/images/rain.gif');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.3;
+} */
 
 .professional-links {
   justify-content: center;
@@ -32,6 +44,7 @@
 }
 
 .opening h1 {
+  font-size: 30px;
   margin: 0 auto;
   text-align: center;
   border-bottom: 1px solid #ccc;
@@ -49,19 +62,22 @@
 }
 .opening a {
   margin-top: 30px;
-  background-color: white;
   padding: 5px 10px;
   margin: 5px;
   display: block;
 }
 
 .opening a:hover {
-  color: darkturquoise;
+  font-weight: bold;
+}
+
+.opening a:active {
+  transform: scale(1.1);
 }
 
 .close {
   width: 93%;
-  margin-left: 30px;
+  margin-left: 45%;
 }
 
 .close a {
@@ -69,7 +85,11 @@
 }
 
 .close:hover {
-  color: darkslategray;
+  font-weight: bold;
+}
+
+.close:active {
+  transform: scale(1.1);
 }
 
 .closed {

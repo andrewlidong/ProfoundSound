@@ -19,7 +19,7 @@
       <div class="opening">
         <h1>Profound Sound</h1>
         <div class="text">
-          <p> This is an audio visualization demo built with the Web Audio API.</p>
+          <p> This is an audio visualization demo built with Web Audio API and D3. </p>
         </div>
         <div class="buttons">
           <ul class="professional-links">
@@ -33,14 +33,18 @@
       </div>
     </div>
 
+    <div class="background-image">
+    </div>
+
 
 
 
     <audio id="audioElement" src="./assets/audio/thismustbetheplace.mp3"></audio>
     <!-- <audio id="audioElement" src="http://127.0.0.1:8887/thismustbetheplace.mp3" autoplay></audio> -->
     <div class="music-player">
-      <button class="play-button">Play</button>
-      <button class="pause-button">Pause</button>
+      <!-- <label for="audioElement" class="button fileinput"><a>Choose a file</a></label> -->
+      <button class="play-button">play</button>
+      <button class="pause-button">pause</button>
       <div class="volBar">
          <i class="fas fa-volume-up"></i>
          <input type="range" class="vol-bar-slider"></input>

@@ -1,7 +1,20 @@
 
+html {
+  overflow-x: hidden;
+}
+
 body {
-  background-color: lightgrey;
-  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+  /* background-color: rgba(0,0,0,0.4); */
+  background-color: lightblue;
+}
+
+.background-image {
+  background-image: url('../assets/images/background.gif');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.3;
 }
 
 #treeCanvas {
@@ -15,17 +28,33 @@ body {
 
 .music-player {
   position: absolute;
-  top: 50px;
-  left: 100px;
+  top: 70px;
+  left: 300px;
   display: flex;
   flex-direction: column;
   font-size: 30px;
+  font-weight: 400;
   z-index: 1;
+}
+
+.music-player button {
+  margin-top: 10px;
+  /* background-color: beige; */
+  padding: 3px;
+  border-radius: 4px;
+}
+
+.music-player button:hover {
+  font-weight: bold;
+}
+
+.music-player button:active {
+  transform: scale(1.1);
 }
 
 .frequency-bar {
   bottom: 100px;
   background: transparent;
-  width: 1000px;
+  width: 100%;
   margin: 0 auto;
 }
