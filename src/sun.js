@@ -28,7 +28,7 @@ export function animateSun(context, canvasWidth, canvasHeight, analyser) {
 
       for (let i = 0; i < freqArray.length; i += 1) {
           let point = freqArray[i];
-          SUN.drawSun(context, point, i);
+          drawSun(context, point, i);
           // drawTree(treeCanvasWidth/2, treeCanvasHeight -100, 150, point, 20, treeContext, treeCanvas, "black", "darkred", "pink");
         }
 
