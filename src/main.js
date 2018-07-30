@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let hue = 40;
 
         let x = ((canvas.width - 400)),
-            y = ((300));
+            y = ((200));
 
         if (false){
           transparency = 0.01;
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     treeCanvas.width = window.innerWidth;
     treeCanvas.height = window.innerHeight;
 
-    TREE.drawTree(treeCanvas.width/2, treeCanvas.height, 200, 0, 20, treeContext, treeCanvas, "black", "red", "pink");
+    TREE.drawTree(treeCanvas.width/2, treeCanvas.height, 150, 0, 20, treeContext, treeCanvas, "black", "red", "pink");
 
 
 

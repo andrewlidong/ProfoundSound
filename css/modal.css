@@ -14,8 +14,8 @@
   height: 50%;
   margin: 5% auto;
   padding: 25px;
-  background-color: beige;
   background-image: url('../assets/images/rain.gif');
+  background-color: lightblue;
   background-size: cover;
   color: black;
   position: relative;
