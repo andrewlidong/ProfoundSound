@@ -22,6 +22,7 @@ export function drawSun(context, freqValue, freqSequence) {
 export function animateSun(context, canvasWidth, canvasHeight, analyser) {
     let freqArray;
 
+    debugger
     context.clearRect(0, 0, canvasWidth, canvasHeight);
     freqArray = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteTimeDomainData(freqArray);
