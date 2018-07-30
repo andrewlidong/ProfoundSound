@@ -4,6 +4,7 @@ import * as MODAL from "./modal";
 import * as TREE from "./tree";
 import * as SUN from "./sun";
 import * as D3BAR from "./d3bar";
+import * as d3 from "d3";
 
 document.addEventListener('DOMContentLoaded', () => {
 
