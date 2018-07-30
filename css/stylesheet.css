@@ -1,77 +1,31 @@
-.modal {
+
+body {
+  background-color: lightgrey;
+  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+}
+
+#treeCanvas {
+  background: transparent;
   position: absolute;
-  width: 100%;
-  background-color: rgba(255,255,255, .6);
-  top: 0;
-  left: 0;
-  height: 100%;
-  z-index: 1000;
-  font-family: 'Lato';
+}
+#canvas {
+  background: transparent;
+  position: absolute;
 }
 
-.opening {
-  border: 3px solid white;
-  width: 25%;
-  margin: 50px auto;
-  padding: 25px;
-  background-color: rgba(255,255,255, .5);
-  color: #555;
-    position: relative;
+.music-player {
+  position: absolute;
+  top: 50px;
+  left: 100px;
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  z-index: 1;
 }
 
-.opening .text{
-  margin: 15px auto;
-}
-
-.opening h1 {
+.frequency-bar {
+  bottom: 100px;
+  background: transparent;
+  width: 1000px;
   margin: 0 auto;
-  text-align: center;
-  border-bottom: 1px solid #ccc;
-  padding-left: -20px;
-  padding-right: -20px;
-}
-
-.opening li {
-  display: inline-block;
-  margin: 0 6px;
-}
-
-.opening .buttons {
-  margin: 0 auto;
-}
-.opening a {
-  margin-top: 30px;
-  background-color: white;
-  padding: 5px 10px;
-  margin: 5px;
-  display: block;
-}
-
-.opening a:hover {
-  color: darkturquoise;
-}
-
-.close {
-  width: 93%;
-  margin-left: 30px;
-}
-
-.close a {
-  text-align: center;
-}
-
-.close:hover {
-  color: darkslategray;
-}
-
-.closed {
-  display: none;
-}
-
-.opening li.github {
-  margin-left: 20px;
-}
-
-.opening li.personal {
-  margin-left: 20px;
 }

@@ -5,8 +5,11 @@
     <title>Profound Sound</title>
     <link rel='stylesheet' type='text/css' href='css/reset.css'>
     <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/modal.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://threejs.org/build/three.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
     <script type='text/javascript' src="src/bundle.js" charset="utf-8"></script>
     <link rel="icon" type="image/png" href="assets/images/favicon.ico">
   </head>
@@ -19,31 +22,44 @@
           <p> This is an audio visualization demo built with the Web Audio API.</p>
         </div>
         <div class="buttons">
-          <ul>
+          <ul class="professional-links">
             <li class="github"><a href="http://www.github.com/andrewlidong">Github</a></li>
+            <li class="linkedin"><a href="https://www.linkedin.com/in/andrew-dong/">LinkedIn</a></li>
+            <li class="angellist"><a href="http://www.andrewlidong.com">AngelList</a></li>
             <li class="personal"><a href="http://www.andrewlidong.com">Personal</a></li>
-            <li class="close"><a>CONTINUE</a></li>
           </ul>
         </div>
+        <button class='close' type="button" name="button">let's dance</button>
       </div>
     </div>
 
 
+
+
     <!-- <audio id="audioElement" src="./assets/audio/colors.mp3" autoplay></audio> -->
-    <audio id="audioElement" src="http://127.0.0.1:8887/IOnlySaid.mp3" autoplay></audio>
-    <div>
+    <audio id="audioElement" src="./assets/audio/thismustbetheplace.mp3" autoplay></audio>
+    <div class="music-player">
       <button class="play-button">Play</button>
       <button class="pause-button">Pause</button>
-      <button class="volup-button">IncreaseVol</button>
-      <button class="voldown-button">DecreaseVol</button>
+      <div class="volBar">
+         <i class="fas fa-volume-up"></i>
+         <input type="range" class="vol-bar-slider"></input>
+     </div>
+     <div class="help">
+       <button type="button" name="button">help</button>
+     </div>
     </div>
 
-    <div class="graph" id="graph">
 
-    </div>
-
+    <canvas id="canvas"></canvas>
+    <canvas id="treeCanvas"></canvas>
+    <!-- <div class="graph" id="graph">
+    </div> -->
+    <div class="frequency-bar"></div>
     <!-- <canvas id="koch_curve" width="1000" height="800"></canvas> -->
-    <canvas id="fractal_tree" width="1000" height="800"></canvas>
+    <!-- <canvas id="fractal_tree" width="1000" height="800"></canvas> -->
+
+
 
   </body>
 </html>

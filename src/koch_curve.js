@@ -1,8 +1,3 @@
-
-
-
-
-
 // Thue-Morse Sequence
 
 // Generates the complement of the previous digit
