@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    SUN.animateSun(context, canvas.width, canvas.height, analyser);
+    animateSun(context, canvas.width, canvas.height, analyser);
 
     const treeCanvas = document.getElementById('treeCanvas');
     const treeContext = treeCanvas.getContext('2d');
