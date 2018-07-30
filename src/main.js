@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // continuously loop and update chart with frequency data.
     function renderChart() {
-      console.log(frequencyData);
+      // console.log(frequencyData);
       // window.requestAnimationFrame tells the browser to run renderChart() before repainting the screen.
       requestAnimationFrame(renderChart);
 
