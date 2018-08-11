@@ -56,7 +56,7 @@ Since an HTML canvas begins its coordinate system with (0,0) at the top left cor
 In the case of radial symmetry, the first user click calculates an initial angle `theta` about the origin. This, in conjunction with the `radialOrder` -- or number of symmetry slices -- is used to determine equidistantly-spaced points in radians whose canvas coordinates are calculated using trigonometry.
 
 ```
-// from canvas.js
+// fro canvas.js
 
 computeRadialSymPairs(e){
   const symmetricPairSet = [];
