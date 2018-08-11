@@ -86,9 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function animateSun(ctx, canvasWidth, canvasHeight, analyser) {
-        let freqArray;
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-        freqArray = new Uint8Array(analyser.frequencyBinCount);
+        let freqArray = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteTimeDomainData(freqArray);
 
           for (let i = 0; i < freqArray.length; i += 1) {

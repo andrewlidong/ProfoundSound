@@ -2,7 +2,9 @@
 
 ## About
 
-Profound Sound is a music visualization app which allows users to watch, listen and dance along to visual representations of f. The app is powered through vanilla JavaScript DOM manipulation of an HTML canvas element, along with Web Audio API and D3 which allow for translation of waves of sound into visual displays.  
+Profound Sound is a music visualization app that allows users to watch, listen and dance along to visual representations of This Must Be The Place by The Talking Heads. The app was originally inspired by an Animal Collective concert experience in NYC, and the song choice was made in honor of two good friends who were recently married.  
+
+The app is powered by vanilla JavaScript DOM manipulation of an HTML canvas element, along with Web Audio API and D3 interaction which allow the translation of waves of sound into visual displays.  
 
 Access the live site [here](http://andrewlidong.xyz/profound_sound/
 ).
@@ -11,16 +13,29 @@ Access the live site [here](http://andrewlidong.xyz/profound_sound/
 
 <img src="https://media.giphy.com/media/d2StSulGRSqdWuLnmT/giphy.gif" height="400" alt="profoundsound-gif">
 
+## Architecture and Technologies
 
-<!-- ## How to use Profound Sound
-*  -->
+The project is implemented with the following technologies:
+
+- `JavaScript ES6` for integrating various apis,
+- `Web Audio API` for extracting data relating to the waveform of the sound of an html5 audio element
+- `D3` to display scalable vector graphics dependent on the data extracted from `Web Audio API`
+- `HTML5` for formatting
+- `CSS3` for styling components
+- `Webpack4` to bundle js files
+
 
 ## Technical Implementation
-The two most complicated components of the application are:
-1. Its canvas auto-calibration relative to user screen size & scroll
-2. Its real-time symmetry calculation via conversion of the canvas grid into a Cartesian coordinate plane
 
-### Canvas auto-calibration
+Some technical highlights of the app are:
+1. Introductory modal containing app instructions
+2. Recursive rendering of a binary tree
+3. Extraction of frequency data into unsigned integers
+4. Dynamic re-rendering of a canvas sphere
+5. Dynamic re-rendering of an SVG chart by integrating D3 API
+
+### Introductory modal containing app instructions
+
 Since an HTML canvas does not provide mouse coordinates when a user clicks over it, I dynamically calculated canvas coordinates from full window MouseEvent coordinates via the `getCanvasCoords` function. This translates the window's mouse coordinates into canvas coordinates which are agnostic to screen size and window scroll. The result is a precise drawing experience for the user even if s/he scrolls or changes screen size during a drawing session.
 
 ```
@@ -34,7 +49,8 @@ getCanvasCoords(){
 }
 ```
 
-### Cartesian canvas symmetric calculations
+### Recursive rendering of a binary tree
+
 Since an HTML canvas begins its coordinate system with (0,0) at the top left corner, I translated the canvas grid into a Cartesian plane. When a user clicks anywhere on the canvas, the distance from the origin is calculated as well as a set of symmetric point(s) which will be simultaneously drawn.
 
 In the case of radial symmetry, the first user click calculates an initial angle `theta` about the origin. This, in conjunction with the `radialOrder` -- or number of symmetry slices -- is used to determine equidistantly-spaced points in radians whose canvas coordinates are calculated using trigonometry.
@@ -78,6 +94,14 @@ computeRadialSymPairs(e){
 }
 
 ```
+
+### Extraction of frequency data into unsigned integers
+
+
+### Dynamic re-rendering of a canvas sphere
+
+
+### Dynamic re-rendering of an SVG chart by integrating D3 API
 
 ## Future Features
 In the future, I plan to add the following features:
