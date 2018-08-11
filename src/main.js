@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audioSrc.connect(analyser);
     audioSrc.connect(audioCtx.destination);
 
-    let frequencyData = new Uint8Array(200);
+    let frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
 
     const canvas = document.getElementById('canvas');
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    function drawSun(context, freqValue) {
+    function drawSun(context, frequencyDataPoint) {
         let transparency;
         let hue = 40;
 
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         context.beginPath();
-        context.arc(x-(freqValue / 8), y-(freqValue / 8), (Math.abs(freqValue-150)) * 2 , 0, 2 * Math.PI, false);
+        context.arc(x, y, (Math.abs(frequencyDataPoint-100)) * 2 , 0, 2 * Math.PI);
         context.strokeStyle = 'hsla(' + hue + ', ' + 100 + '%,' + 40 + '%,' + transparency  + ')';
         context.fillStyle = "hsla(" + hue + ", 100%, 60%, .01)";
 
@@ -87,17 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animateSun(ctx, canvasWidth, canvasHeight, analyser) {
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-        let freqArray = new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteTimeDomainData(freqArray);
+        analyser.getByteTimeDomainData(frequencyData);
 
-          for (let i = 0; i < freqArray.length; i += 1) {
-              let point = freqArray[i];
-              drawSun(context, point);
+          for (let i = 0; i < frequencyData.length; i += 1) {
+              let frequencyDataPoint = frequencyData[i];
+              drawSun(context, frequencyDataPoint);
             }
 
         requestAnimationFrame(animateSun.bind(this, ctx, canvasWidth, canvasHeight, analyser));
     }
-
 
     animateSun(context, canvas.width, canvas.height, analyser);
 
@@ -108,10 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     TREE.drawTree(treeCanvas.width/2, treeCanvas.height, 150, 0, 20, treeContext, treeCanvas, "black", "red", "pink");
 
+
     let svgHeight= window.innerHeight;
     let svgWidth= window.innerWidth + 1700;
     let barPadding='15';
-
 
     let svg = D3BAR.createSvg('.frequency-bar', svgHeight, svgWidth);
 

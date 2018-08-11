@@ -28,80 +28,163 @@ The project is implemented with the following technologies:
 ## Technical Implementation
 
 Some technical highlights of the app are:
-1. Introductory modal containing app instructions
-2. Recursive rendering of a binary tree
-3. Extraction of frequency data into unsigned integers
-4. Dynamic re-rendering of a canvas sphere
-5. Dynamic re-rendering of an SVG chart by integrating D3 API
 
-### Introductory modal containing app instructions
-
-Since an HTML canvas does not provide mouse coordinates when a user clicks over it, I dynamically calculated canvas coordinates from full window MouseEvent coordinates via the `getCanvasCoords` function. This translates the window's mouse coordinates into canvas coordinates which are agnostic to screen size and window scroll. The result is a precise drawing experience for the user even if s/he scrolls or changes screen size during a drawing session.
-
-```
-// from canvas.js
-
-getCanvasCoords(){
-  const canvasPosition = this.canvasElement.getBoundingClientRect();
-  const canvasLeft = canvasPosition.left + window.scrollX;
-  const canvasTop = canvasPosition.top + window.scrollY;
-  return [canvasLeft, canvasTop];
-}
-```
+1. Recursive rendering of a binary tree
+2. Extraction of frequency data
+3. Dynamic re-rendering of a canvas sphere
+4. Dynamic re-rendering of an SVG chart by integrating D3 API
 
 ### Recursive rendering of a binary tree
 
-Since an HTML canvas begins its coordinate system with (0,0) at the top left corner, I translated the canvas grid into a Cartesian plane. When a user clicks anywhere on the canvas, the distance from the origin is calculated as well as a set of symmetric point(s) which will be simultaneously drawn.
-
-In the case of radial symmetry, the first user click calculates an initial angle `theta` about the origin. This, in conjunction with the `radialOrder` -- or number of symmetry slices -- is used to determine equidistantly-spaced points in radians whose canvas coordinates are calculated using trigonometry.
+At the centerpiece of Profound Sound is a recursively rendered binary tree in Canvas, which begins with a single branch length and grows until the deepest branches (those with length < 10) are filled with leaves.  
 
 ```
-// fro canvas.js
+  // from tree.js
 
-computeRadialSymPairs(e){
-  const symmetricPairSet = [];
+  export function drawTree(startX, startY, len, angle, branchWidth, treeContext, canvasEl,
+                        branchColor, leafColor, shadowColor) {
 
-  const xDistance = (e.pageX - this.canvasLeftSide() - this.axisPoint[0]);
-  const yDistance = -(e.pageY - this.canvasTop() - this.axisPoint[1]);
-  const pythagoreanSum = Math.pow(xDistance, 2) + Math.pow(yDistance, 2);
-  const radius =  Math.sqrt(pythagoreanSum);
+    treeContext.beginPath();
+    treeContext.save();
 
-  let theta;
-  if (xDistance >= 0 && yDistance >= 0){
-    theta = Math.atan(yDistance / xDistance);
-  } else if (xDistance <= 0 && yDistance >= 0){
-    theta = Math.PI - Math.asin(yDistance / radius);
-  } else if (xDistance <= 0 && yDistance <= 0){
-    theta = Math.PI + Math.atan(yDistance / xDistance);
-  } else if (xDistance >= 0 && yDistance <= 0){
-    theta = (2 * Math.PI) - Math.acos(xDistance / radius);
+    treeContext.lineWidth = branchWidth;
+    treeContext.strokeStyle = branchColor;
+    treeContext.fillStyle = leafColor;
+    treeContext.shadowBlur = 15;
+    treeContext.shadowColor = shadowColor;
+
+    treeContext.translate(startX, startY);
+    treeContext.rotate(angle * Math.PI/180);
+    treeContext.moveTo(0,0);
+    treeContext.lineTo(0,-len);
+
+    treeContext.stroke();
+
+    if (len < 10) {
+      treeContext.beginPath();
+      treeContext.arc(0,-len, 10, 0, Math.PI/2);
+      treeContext.fill();
+      treeContext.restore();
+      return;
+    }
+
+    drawTree(0, -len, (len*0.8) - 0.5, angle + 10, branchWidth * 0.8, treeContext, canvasEl);
+    drawTree(0, -len, (len*0.8) - 0.5, angle - 10, branchWidth * 0.8, treeContext, canvasEl);
+
+    treeContext.restore();
   }
-
-  const sliceSizeRadians = (2 * Math.PI) / this.radialOrder;
-
-  const thetaPrimes = [];
-  //note: thetaPrimes will not include theta since firstPair coordinates are already known from the user's click
-  for (let i = 1; i <= this.radialOrder; i ++){
-    thetaPrimes.push(theta + (sliceSizeRadians * i));
-  }
-
-  thetaPrimes.forEach(angle => {
-    const canvasX = (radius * Math.cos(angle)) + this.axisPoint[0];
-    const canvasY = this.axisPoint[1] - (radius * Math.sin(angle));
-    symmetricPairSet.push([canvasX, canvasY]);
-  });
-  return { symmetricPairSet };
-}
-
 ```
 
-### Extraction of frequency data into unsigned integers
+### Extraction of frequency data
+
+In order to extract data from its audio file, Profound Sound integrates with Web Audio API.  In the following code snippet we create a media element source and an audio analyzer.  We then proceed to connect the two and create an array of unsigned integers from the frequencyBinCount of the analyzer, which will later be used for visualizations.  
+
+```
+  // from main.js
+
+  let audio = document.getElementById("audioElement");
+  let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  let audioElement = document.getElementById('audioElement');
+
+  audioElement.crossOrigin = "anonymous";
+
+  let audioSrc = audioCtx.createMediaElementSource(audioElement);
+  let analyser = audioCtx.createAnalyser();
+  analyser.smoothingTimeConstant = 0.5;
+  analyser.fftSize = 256;
+
+  audioSrc.connect(analyser);
+  audioSrc.connect(audioCtx.destination);
+
+  let frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
+```
 
 
 ### Dynamic re-rendering of a canvas sphere
 
+To render the dancing sun using canvas, we take the first element the array of unsigned integers from our frequencyData and pass that into an draw function as the parameter for the radius of our sun.  Since we need to clear the canvas upon each re-rendering, we're forced to set the animation on a separate canvas element.  We're also able to dynamically set the hue of the sun.  
 
-### Dynamic re-rendering of an SVG chart by integrating D3 API
+```
+  // from main.js
+
+  function drawSun(context, frequencyDataPoint) {
+      let transparency;
+      let hue = 40;
+
+      let x = ((canvas.width - 400)),
+          y = ((200));
+
+      if (false){
+        transparency = 0.01;
+      } else {
+        transparency = 0.08;
+      }
+
+      context.beginPath();
+      context.arc(x, y, (Math.abs(frequencyDataPoint-100)) * 2 , 0, 2 * Math.PI);
+      context.strokeStyle = 'hsla(' + hue + ', ' + 100 + '%,' + 40 + '%,' + transparency  + ')';
+      context.fillStyle = "hsla(" + hue + ", 100%, 60%, .01)";
+
+      context.fill();
+      context.lineWidth = 2;
+      context.stroke();
+  }
+
+  function animateSun(ctx, canvasWidth, canvasHeight, analyser) {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      analyser.getByteTimeDomainData(frequencyData);
+
+        for (let i = 0; i < frequencyData.length; i += 1) {
+            let frequencyDataPoint = frequencyData[i];
+            drawSun(context, frequencyDataPoint);
+          }
+
+      requestAnimationFrame(animateSun.bind(this, ctx, canvasWidth, canvasHeight, analyser));
+  }
+```
+
+
+### Dynamic re-rendering of an SVG chart by integrating D3
+
+To render the dancing grass we pull a scalable vector graph from the D3 library and pass in our frequency data.  We're able to constantly re-render the chart using request animation frame from Canvas.  The color also adjusts dynamically based on the height of each rectangle in the chart.  
+
+```
+  // from main.js
+
+  let svgHeight= window.innerHeight;
+  let svgWidth= window.innerWidth + 1700;
+  let barPadding='15';
+
+  let svg = D3BAR.createSvg('.frequency-bar', svgHeight, svgWidth);
+
+  svg.selectAll('rect')
+    .data(frequencyData)
+    .enter()
+    .append('rect')
+    .attr('x', function(d,i) {
+      return i * (svgWidth / frequencyData.length);
+    })
+    .attr('width', svgWidth / frequencyData.length - barPadding);
+
+  function renderChart() {
+    requestAnimationFrame(renderChart);
+
+    analyser.getByteFrequencyData(frequencyData);
+
+    svg.selectAll('rect')
+      .data(frequencyData)
+      .attr('y', function(d) {
+        return svgHeight - d;
+      })
+      .attr('height', function(d) {
+        return d;
+      })
+      .attr('fill', function(d) {
+        return 'rgb(0, 200,' + d + ')';
+      });
+  }
+```
 
 ## Future Features
 In the future, I plan to add the following features:
