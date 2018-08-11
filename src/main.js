@@ -1,21 +1,11 @@
-// import * as KOCH_CURVE from "./koch_curve";
-// import * as GRAPH from "./graph";
-import * as MODAL from "./modal";
 import * as TREE from "./tree";
-// import * as SUN from "./sun";
-import * as SUN from './sun';
+// import * as SUN from './sun';
 import * as D3BAR from "./d3bar";
 import * as d3 from "d3";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-
-
-    // Audio buttons
-
     let audio = document.getElementById("audioElement");
-
-
 
     const playButton = document.querySelector('.play-button');
     playButton.addEventListener('click', () => {
@@ -27,23 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
       audio.pause();
     });
 
-    // const volBarSlider = document.querySelector('.vol-bar-slider');
-    // volBarSlider.addEventListener('mousedown', (e) => {
-    //   volBarSlider.addEventListener('change', e => {
-    //     audio.volume = (e.target.value * 1) / 100;
-    //     console.log(e.target.value); // between 0 and 100 as string
-    //   });
-    // });
-
     const volBarSlider = document.querySelector('.vol-bar-slider');
-    volBarSlider.addEventListener('change', e => {
+    volBarSlider.addEventListener('input', e => {
       audio.volume = e.currentTarget.value / 100;
     });
-
 
     const closeButton = document.getElementsByClassName('close')[0];
     const modal = document.getElementsByClassName('modal')[0];
     const question = document.getElementsByClassName('help')[0];
+
+    modal.addEventListener("click", function(){
+      modal.classList.add("closed");
+      audio.play();
+    });
 
     closeButton.addEventListener("click", function(){
       modal.classList.add("closed");
@@ -55,9 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.classList.remove("closed");
     });
 
-
-    // Hooking audioElement to web audio api
-
     let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let audioElement = document.getElementById('audioElement');
 
@@ -68,8 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     analyser.smoothingTimeConstant = 0.5;
     analyser.fftSize = 256;
 
-
-    // Bind analyser to the media element source.
     audioSrc.connect(analyser);
     audioSrc.connect(audioCtx.destination);
 
@@ -113,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
           for (let i = 0; i < freqArray.length; i += 1) {
               let point = freqArray[i];
               drawSun(context, point);
-              // drawTree(treeCanvasWidth/2, treeCanvasHeight -100, 150, point, 20, treeContext, treeCanvas, "black", "darkred", "pink");
             }
 
         requestAnimationFrame(animateSun.bind(this, ctx, canvasWidth, canvasHeight, analyser));
@@ -129,11 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     TREE.drawTree(treeCanvas.width/2, treeCanvas.height, 150, 0, 20, treeContext, treeCanvas, "black", "red", "pink");
 
-
-
-    // where we copy our audio frequency data to.
-
-    // increased size of svg to accomodate larger amounts of data points.
     let svgHeight= window.innerHeight;
     let svgWidth= window.innerWidth + 1700;
     let barPadding='15';
@@ -150,20 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .attr('width', svgWidth / frequencyData.length - barPadding);
 
-    // constantly streaming audio data to the browser arnd dynamically updating the D3 bar chart
-
-    // continuously loop and update chart with frequency data.
     function renderChart() {
-      // console.log(frequencyData);
-      // window.requestAnimationFrame tells the browser to run renderChart() before repainting the screen.
       requestAnimationFrame(renderChart);
-
-      // Copy frequency data to frequencyData array
-      // uses attached AnalyserNode to grab frequency data of audio and copy it to Uint8ArrayfrequencyData
 
       analyser.getByteFrequencyData(frequencyData);
 
-      // Update d3 chart with new data.
       svg.selectAll('rect')
         .data(frequencyData)
         .attr('y', function(d) {
@@ -179,56 +145,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderChart();
 });
-
-
-
-
-
-// // BLACK BARS
-//
-// // height and width of our Scalable Vector Graphic
-// let svgHeight = 100;
-// let svgWidth = 600;
-// let barPadding = 1;
-//
-// let graph = GRAPH.createSvg('#graph', svgHeight, svgWidth);
-//
-//
-// GRAPH.displayGraph(graph);
-
-
-// MY KOCH
-
-// const myKoch = document.getElementById("koch_curve");
-// const ctxKoch = myKoch.getContext("2d");
-//
-// KOCH_CURVE.draw(ctxKoch, myKoch);
-
-// RENDER TREE
-
-// function renderTree() {
-//   const myTree = document.getElementById("fractal_tree");
-//   const ctxTree = myTree.getContext("2d");
-//
-//   console.log(frequencyData);
-//   //
-//   requestAnimationFrame(renderTree);
-//   //
-//   analyser.getByteFrequencyData(frequencyData);
-//
-//   FRACTAL_TREE.draw(360, 600, 120, 0, 20, ctxTree, myTree, "black", "darkred", "pink");
-//
-//   // if (frequencyData[frequencyData.length/2] === 0){
-//   //   FRACTAL_TREE.draw(360, 600, 120, 0, 20, ctxTree, myTree, "black", "darkred", "pink");
-//   //   ctxTree.clearRect(0,0, myTree.width, myTree.height);
-//   // } else if (frequencyData[frequencyData.length/2] > 50) {
-//   //   FRACTAL_TREE.draw(360, 600, 120, 0, 20, ctxTree, myTree, "blue", "darkred", "pink");
-//   //   ctxTree.clearRect(0,0, myTree.width, myTree.height);
-//   // } else if (frequencyData[frequencyData.length/2] < 50) {
-//   //   FRACTAL_TREE.draw(360, 600, 120, 0, 20, ctxTree, myTree, "red", "darkred", "pink");
-//   //   ctxTree.clearRect(0,0, myTree.width, myTree.height);
-//   // }
-//
-// }
-//
-// renderTree();

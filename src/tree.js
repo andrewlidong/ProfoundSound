@@ -25,8 +25,8 @@ export function drawTree(startX, startY, len, angle, branchWidth, treeContext, c
     return;
   }
 
-  drawTree(0, -len, (len*0.8), angle + 10, branchWidth * 0.8, treeContext, canvasEl);
-  drawTree(0, -len, (len*0.8), angle - 10, branchWidth * 0.8, treeContext, canvasEl);
+  drawTree(0, -len, (len*0.8) - 0.5, angle + 10, branchWidth * 0.8, treeContext, canvasEl);
+  drawTree(0, -len, (len*0.8) - 0.5, angle - 10, branchWidth * 0.8, treeContext, canvasEl);
 
   treeContext.restore();
 }
@@ -40,7 +40,6 @@ export const step = val => () => {
   // if (time - timestamp < 100000) {
   //   requestAnimationFrame(step(val));
   // }
-  // debugger
 
   // timestamp = time;
 
@@ -48,7 +47,6 @@ export const step = val => () => {
   TREE.drawTree(treeCanvasWidth/2, treeCanvasHeight, 180, val, 20, treeContext, treeCanvas, "black", "darkblue", "pink");
 
   if (val >= 1) {
-    // debugger
     factor = -1;
   }
 

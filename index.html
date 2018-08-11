@@ -3,15 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Profound Sound</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.ico">
     <link rel='stylesheet' type='text/css' href='css/reset.css'>
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <!-- <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
-    <script src="https://threejs.org/build/three.min.js"></script>
+    <!-- <script src="https://threejs.org/build/three.min.js"></script> -->
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
     <script type='text/javascript' src="src/bundle.js" charset="utf-8"></script>
-    <link rel="icon" type="image/png" href="assets/images/favicon.ico">
   </head>
 
   <body>
@@ -19,14 +20,14 @@
       <div class="opening">
         <h1>Profound Sound</h1>
         <div class="text">
-          <p> This is an audio visualization demo built with Web Audio API and D3. </p>
+          <p> Profound Sound is a music visualization demo built using Web Audio API and D3. </p>
         </div>
         <div class="buttons">
           <ul class="professional-links">
-            <li class="github"><a href="http://www.github.com/andrewlidong">Github</a></li>
-            <li class="linkedin"><a href="https://www.linkedin.com/in/andrew-dong/">LinkedIn</a></li>
-            <li class="angellist"><a href="http://www.andrewlidong.com">AngelList</a></li>
-            <li class="personal"><a href="http://www.andrewlidong.com">Personal</a></li>
+            <button class="github"><a href="http://www.github.com/andrewlidong"><i class="fab fa-github"></i></a></button>
+            <button class="linkedin"><a href="https://www.linkedin.com/in/andrew-dong/"><i class="fab fa-linkedin"></i></a></button>
+            <button class="angellist"><a href="https://angel.co/andrewlidong"><i class="fab fa-angellist"></i></a></button>
+            <button class="personal"><a href="http://www.andrewlidong.xyz"><i class="fas fa-laptop"></i></a></button>
           </ul>
         </div>
         <button class='close' type="button" name="button">let's dance</button>
@@ -36,34 +37,28 @@
     <div class="background-image">
     </div>
 
-
-
-
     <audio id="audioElement" src="./assets/audio/thismustbetheplace.mp3"></audio>
-    <!-- <audio id="audioElement" src="http://127.0.0.1:8887/thismustbetheplace.mp3" autoplay></audio> -->
+    <!-- <audio id="audioElement" name="audioElement" src="http://127.0.0.1:8887/thismustbetheplace.mp3" autoplay></audio> -->
     <div class="music-player">
-      <!-- <label for="audioElement" class="button fileinput"><a>Choose a file</a></label> -->
-      <button class="play-button">play</button>
-      <button class="pause-button">pause</button>
-      <div class="volBar">
+      <button class="play-button"><i class="fas fa-play-circle"></i></button>
+      <button class="pause-button"><i class="fas fa-pause"></i></button>
+      <button class="volBar">
          <i class="fas fa-volume-up"></i>
          <input type="range" class="vol-bar-slider"></input>
-     </div>
-     <div class="help">
-       <button type="button" name="button">help</button>
-     </div>
+     </button>
+     <!-- <button class="fileinput"><a><i class="fas fa-file"></i></a></button> -->
+     <button class="help" type="button" name="button"><i class="fas fa-question"></i></button>
+     <button class="github"><a href="http://www.github.com/andrewlidong"><i class="fab fa-github"></i></a></button>
+     <button class="linkedin"><a href="https://www.linkedin.com/in/andrew-dong/"><i class="fab fa-linkedin"></i></a></button>
+     <button class="angellist"><a href="https://angel.co/andrewlidong"><i class="fab fa-angellist"></i></a></button>
+     <button class="personal"><a href="http://www.andrewlidong.xyz"><i class="fas fa-laptop"></i></a></button>
     </div>
-
 
     <canvas id="canvas"></canvas>
     <canvas id="treeCanvas"></canvas>
-    <!-- <div class="graph" id="graph">
-    </div> -->
     <div class="frequency-bar"></div>
-    <!-- <canvas id="koch_curve" width="1000" height="800"></canvas> -->
-    <!-- <canvas id="fractal_tree" width="1000" height="800"></canvas> -->
 
-
+    <p class="main-signature">Created by Andrew Li Dong</p>
 
   </body>
 </html>

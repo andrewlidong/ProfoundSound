@@ -1,11 +1,9 @@
-
 html {
   overflow-x: hidden;
 }
 
 body {
-  /* background-color: rgba(0,0,0,0.4); */
-  background-color: lightblue;
+  background-color: #e6f7ff;
 }
 
 .background-image {
@@ -14,13 +12,13 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  opacity: 0.3;
 }
 
 #treeCanvas {
   background: transparent;
   position: absolute;
 }
+
 #canvas {
   background: transparent;
   position: absolute;
@@ -38,14 +36,11 @@ body {
 }
 
 .music-player button {
-  margin-top: 10px;
-  /* background-color: beige; */
-  padding: 3px;
-  border-radius: 4px;
+  margin-top: 30px;
 }
 
 .music-player button:hover {
-  font-weight: bold;
+  color: darkred;
 }
 
 .music-player button:active {
@@ -57,4 +52,13 @@ body {
   background: transparent;
   width: 100%;
   margin: 0 auto;
+}
+
+.main-signature {
+  top: 20px;
+  left: 20px;
+  position: absolute;
+  z-index: 1;
+  font-style: italic;
+  font-size: 15px;
 }
