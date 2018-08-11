@@ -1,6 +1,4 @@
-# Profound Sound
-
-<!-- ## JavaScript Project Proposal: Profound Sound
+## JavaScript Project Proposal: Profound Sound
 
 ### Background
 
@@ -75,4 +73,4 @@ There are many directions Profound Sound could go.  Some anticipated updates are
 - [ ] Allow playing of music from foreign MP3s
 - [ ] Integration with a 3rd party application such as Spotify or SoundCloud
 - [ ] Integration with user microphone
-- [ ] Adjusting sensitivity tuning for SVG displays -->
+- [ ] Adjusting sensitivity tuning for SVG displays
