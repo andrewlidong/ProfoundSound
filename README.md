@@ -1,18 +1,19 @@
 # Profound Sound
 
 ## About
-Profound Sound is a music visualization app which allows users to create beautiful, symmetrical designs. The app is powered through vanilla JavaScript DOM manipulation of an HTML canvas element.
 
-Access the live site [here](https://aliciaunderhill.github.io/Andala/
+Profound Sound is a music visualization app which allows users to watch, listen and dance along to visual representations of f. The app is powered through vanilla JavaScript DOM manipulation of an HTML canvas element, along with Web Audio API and D3 which allow for translation of waves of sound into visual displays.  
+
+Access the live site [here](http://andrewlidong.xyz/profound_sound/
 ).
 
-(live demo gif here)
+## Demo
 
-## How to use andala
-* Choose your initial drawing preferences at the left of the page
-* Begin drawing by clicking into the canvas
-* Change your drawing preferences at any time and continue drawing
-* Clear your canvas with the button at the right
+<img src="https://media.giphy.com/media/d2StSulGRSqdWuLnmT/giphy.gif" height="400" alt="profoundsound-gif">
+
+
+<!-- ## How to use Profound Sound
+*  -->
 
 ## Technical Implementation
 The two most complicated components of the application are:
@@ -81,10 +82,8 @@ computeRadialSymPairs(e){
 ## Future Features
 In the future, I plan to add the following features:
 
-* User may customize canvas size
-* User may undo a previous action
-* User may draw with circles and other shapes in addition to line drawing
-
+* User may add their own songs
+* User may adjust the colors of the tree, the sun and the grass
 
 
 <!-- ## JavaScript Project Proposal: Profound Sound
