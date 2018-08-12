@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let transparency;
         let hue = 40;
 
-        let x = ((canvas.width - 400)),
-            y = ((200));
+        let x = (canvas.width * 0.90),
+            y = (200);
 
         if (false){
           transparency = 0.01;

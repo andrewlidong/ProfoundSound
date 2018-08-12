@@ -27,7 +27,7 @@ body {
 .music-player {
   position: absolute;
   top: 70px;
-  left: 300px;
+  left: 5%;
   display: flex;
   flex-direction: column;
   font-size: 30px;
