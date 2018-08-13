@@ -38,7 +38,7 @@ Some technical highlights of the app are:
 
 At the centerpiece of Profound Sound is a recursively rendered binary tree in Canvas, which begins with a single branch length and grows until the deepest branches (those with length < 10) are filled with leaves.  
 
-```
+```javascript
   // from tree.js
 
   export function drawTree(startX, startY, len, angle, branchWidth, treeContext, canvasEl,
@@ -79,7 +79,7 @@ At the centerpiece of Profound Sound is a recursively rendered binary tree in Ca
 
 In order to extract data from its audio file, Profound Sound integrates with Web Audio API.  In the following code snippet we create a media element source and an audio analyzer.  We then proceed to connect the two and create an array of unsigned integers from the frequencyBinCount of the analyzer, which will later be used for visualizations.  
 
-```
+```javascript
   // from main.js
 
   let audio = document.getElementById("audioElement");
@@ -103,9 +103,9 @@ In order to extract data from its audio file, Profound Sound integrates with Web
 
 ### Dynamic re-rendering of a canvas sphere
 
-To render the dancing sun using canvas, we take the first element the array of unsigned integers from our frequencyData and pass that into an draw function as the parameter for the radius of our sun.  Since we need to clear the canvas upon each re-rendering, we're forced to set the animation on a separate canvas element.  We're also able to dynamically set the hue of the sun.  
+To render the dancing sun using canvas, we take the first element the array of unsigned integers from our frequencyData and pass that into the draw function as the parameter for the radius of our sun.  Since we need to clear the canvas upon each re-render, we're forced to set the animation on a separate canvas element.  We're also able to dynamically set the hue of the sun.  
 
-```
+```javascript
   // from main.js
 
   function drawSun(context, frequencyDataPoint) {
@@ -149,7 +149,7 @@ To render the dancing sun using canvas, we take the first element the array of u
 
 To render the dancing grass we pull a scalable vector graph from the D3 library and pass in our frequency data.  We're able to constantly re-render the chart using request animation frame from Canvas.  The color also adjusts dynamically based on the height of each rectangle in the chart.  
 
-```
+```javascript
   // from main.js
 
   let svgHeight= window.innerHeight;
