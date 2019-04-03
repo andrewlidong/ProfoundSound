@@ -6,7 +6,7 @@ Profound Sound is a music visualization app that allows users to watch, listen a
 
 The app is powered by vanilla JavaScript DOM manipulation of an HTML canvas element, along with Web Audio API and D3 interaction which allow the translation of waves of sound into visual displays.  
 
-Access the live site [here](http://andrewlidong.xyz/profound_sound/
+Access the live site [here](http://andrewlidong.xyz/ProfoundSound/
 ).
 
 ## Demo
