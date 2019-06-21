@@ -9,6 +9,8 @@ The app is powered by vanilla JavaScript DOM manipulation of an HTML canvas elem
 Access the live site [here](http://andrewlidong.xyz/ProfoundSound/
 ).
 
+Note: Due to a cross-browser resource sharing error, Web Audio API may fail to load on certain browsers.  
+
 ## Demo
 
 <img src="https://media.giphy.com/media/d2StSulGRSqdWuLnmT/giphy.gif" height="400" alt="profoundsound-gif">
