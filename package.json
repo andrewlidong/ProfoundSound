@@ -21,7 +21,7 @@
   "homepage": "https://github.com/andrewlidong/profound_sound#readme",
   "devDependencies": {
     "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.3"
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "d3": "^5.5.0",
